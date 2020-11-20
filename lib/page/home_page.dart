@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tifront/data/article_data.dart';
-import 'package:tifront/widget/article_list_area.dart';
-import 'package:tifront/widget/stat_area.dart';
-import 'package:tifront/widget/visual_area.dart';
+import 'package:tifront/widget/articles/article_list_area.dart';
+import 'package:tifront/widget/stat/stat_area.dart';
+import 'package:tifront/widget/visual/visual_area.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,20 +13,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("威胁情报"),
+        title: Text("威胁情报监控系统"),
+        centerTitle: true,
       ),
       body: Container(
-        color: Colors.red,
+        color: Colors.black54,
         child: Container(
           margin: EdgeInsets.all(10),
-          color: Colors.purple,
+//          color: Colors.black54,
           child: Row(
             children: <Widget>[
               Flexible(
                 flex: 2,
-                child: ArticleList(
-                  itemTexts: articleListData,
-                ),
+                child: ArticleListArea(),
               ),
               Flexible(
                 flex: 3,

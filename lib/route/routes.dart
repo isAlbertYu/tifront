@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tifront/page/home_page.dart';
+import 'package:tifront/page/test_page.dart';
 
 final _routes = {
   '/': (context) => HomePage(),
+  '/test': (context) => TestPage(),
 };
 
 //settings: 包含有路由的名称，以及路由所需传递的参数
