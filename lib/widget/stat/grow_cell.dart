@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/util/screen_util.dart';
 import 'package:tifront/widget/stat/models/cell_data.dart';
+import 'package:tifront/widget/stat/models/cells_block_rfr_btn_model.dart';
 
+///装载统计数据的小单胞
 class StatCell extends StatefulWidget {
   final String title;
   final int statCellId;
@@ -21,10 +23,10 @@ class _StatCellState extends State<StatCell>
 
   initState() {
     super.initState();
-    controller = new AnimationController(
+    controller = AnimationController(
         duration: const Duration(milliseconds: 200), vsync: this);
     //角度从0变到90度
-    animation = new Tween(begin: 1.0, end: 1.5).animate(
+    animation = Tween(begin: 1.0, end: 1.5).animate(
       CurvedAnimation(
         parent: controller,
         curve: Curves.easeInOut,
@@ -38,8 +40,17 @@ class _StatCellState extends State<StatCell>
     scUtil.init(context);
     //return AnimatedImage(animation: animation,);
     return Container(
-      color: Colors.yellow,
-      margin: EdgeInsets.fromLTRB(20, 50, 20, 50),
+      decoration: BoxDecoration(
+        //背景
+        color: Colors.black54,
+        //设置四周圆角 角度
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
+        ),
+      ),
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+//      margin: EdgeInsets.fromLTRB(20, 50, 20, 50),
       child: MouseRegion(
         onEnter: (_) {
           controller.forward();
@@ -74,29 +85,12 @@ class _StatCellState extends State<StatCell>
                       //字体大小
                       fontWeight: FontWeight.w900,
                       //字体粗细  粗体和正常
-                      color: Colors.black, //文字颜色
+                      color: Colors.white70, //文字颜色
                     ),
                   ),
                   StatDataText(
                     statDataTextId: widget.statCellId,
                   ),
-//                  Text(
-//                    widget.number,
-//                    textAlign: TextAlign.left,
-//                    style: TextStyle(
-//                      wordSpacing: 0.0,
-//                      //单词间隙(负值可以让单词更紧凑)
-//                      letterSpacing: 0.0,
-//                      //字母间隙(负值可以让字母更紧凑)
-//                      fontStyle: FontStyle.normal,
-//                      //文字样式，斜体和正常
-//                      fontSize: scUtil.setSp(12),
-//                      //字体大小
-//                      fontWeight: FontWeight.w900,
-//                      //字体粗细  粗体和正常
-//                      color: Colors.black, //文字颜色
-//                    ),
-//                  ),
                 ],
               ),
             ),
@@ -148,12 +142,12 @@ class StatDataText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CellsDataModel>(
+    return Consumer<CellsBlockRfrBtnModel>(
       ///参数 model 就是绑定的事件结果 ArticleListModel
-      builder: (BuildContext context, CellsDataModel model, Widget child) {
+      builder: (BuildContext context, CellsBlockRfrBtnModel _, Widget child) {
         ScreenUtil scUtil = ScreenUtil.getInstance();
         scUtil.init(context);
-
+        CellsDataModel model = CellsDataModel();
         return Text(
           model.getCellData(statDataTextId).number,
           textAlign: TextAlign.left,
@@ -168,7 +162,7 @@ class StatDataText extends StatelessWidget {
             //字体大小
             fontWeight: FontWeight.w900,
             //字体粗细  粗体和正常
-            color: Colors.black, //文字颜色
+            color: Colors.white70, //文字颜色
           ),
         );
       },

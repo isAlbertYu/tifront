@@ -1,75 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Chart import
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tifront/util/screen_util.dart';
+import 'package:tifront/widget/stat/models/graph_block_rfr_btn_model.dart';
+import 'package:tifront/widget/stat/models/graph_data.dart';
 
-class GraphBlock extends StatefulWidget {
-  @override
-  _GraphBlockState createState() => _GraphBlockState();
-}
-
-class _GraphBlockState extends State<GraphBlock> {
-  bool isCardView = false;
-
+class GraphBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(5),
-      color: Colors.white,
-      child: SfCartesianChart(
-        title: ChartTitle(text: isCardView ? '' : 'Internet Users - 2016'),
-        plotAreaBorderWidth: 0,
-
-        /// X axis as category axis placed here.
-        primaryXAxis: CategoryAxis(
-          majorGridLines: MajorGridLines(width: 0),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
         ),
-        primaryYAxis: NumericAxis(
-            minimum: 0, maximum: 80, isVisible: false, labelFormat: '{value}M'),
-        series: _getDefaultCategory(),
-        tooltipBehavior:
-            TooltipBehavior(enable: true, header: '', canShowMarker: false),
       ),
+      child: ChartCell(),
+    );
+  }
+}
+
+class ChartCell extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<GraphBlockRfrBtnModel>(
+      ///参数 model 就是绑定的事件结果 ArticleListModel
+      builder: (BuildContext context, GraphBlockRfrBtnModel _, Widget child) {
+        ScreenUtil scUtil = ScreenUtil.getInstance();
+        scUtil.init(context);
+        GraphDataModel model = GraphDataModel();
+        return FutureBuilder(
+          future: model.updateData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            // 请求已结束
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                // 请求失败，显示错误
+                return Text("Error: ${snapshot.error}");
+              } else {
+                // 请求成功，显示数据
+                return SfCartesianChart(
+                  title: ChartTitle(text: 'Internet Users - 2016'),
+                  plotAreaBorderWidth: 0,
+
+                  /// X axis as category axis placed here.
+                  primaryXAxis: CategoryAxis(
+                    majorGridLines: MajorGridLines(width: 0),
+                  ),
+                  primaryYAxis: NumericAxis(
+                      minimum: 0,
+                      maximum: 80,
+                      isVisible: false,
+                      labelFormat: '{value}M'),
+                  series: _getCategory(chartData: model.chartData),
+                  tooltipBehavior: TooltipBehavior(
+                    enable: true,
+                    header: '',
+                    canShowMarker: false,
+                  ),
+                );
+              }
+            } else {
+              // 请求未结束，显示loading
+              return UnconstrainedBox(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  strokeWidth: 5,
+                ),
+              );
+            }
+          },
+        );
+      },
     );
   }
 
   /// Returns the list of chart series which need to render on the column chart.
-  List<ColumnSeries<ChartSampleData, String>> _getDefaultCategory() {
-    final List<ChartSampleData> chartData = <ChartSampleData>[
-      ChartSampleData(
-          x: 'South\nKorea', yValue: 39, pointColor: Colors.teal[300]),
-      ChartSampleData(
-          x: 'India',
-          yValue: 20,
-          pointColor: const Color.fromRGBO(53, 124, 210, 1)),
-      ChartSampleData(x: 'South\nAfrica', yValue: 61, pointColor: Colors.pink),
-      ChartSampleData(x: 'China', yValue: 65, pointColor: Colors.orange),
-      ChartSampleData(x: 'France', yValue: 45, pointColor: Colors.green),
-      ChartSampleData(
-          x: 'Saudi\nArabia', yValue: 10, pointColor: Colors.pink[300]),
-      ChartSampleData(x: 'Japan', yValue: 16, pointColor: Colors.purple[300]),
-      ChartSampleData(
-          x: 'Mexico',
-          yValue: 31,
-          pointColor: const Color.fromRGBO(127, 132, 232, 1))
-    ];
-    return <ColumnSeries<ChartSampleData, String>>[
-      ColumnSeries<ChartSampleData, String>(
+  List<ColumnSeries<EachDayData, String>> _getCategory(
+      {List<EachDayData> chartData}) {
+    return <ColumnSeries<EachDayData, String>>[
+      ColumnSeries<EachDayData, String>(
         dataSource: chartData,
-        xValueMapper: (ChartSampleData data, _) => data.x,
-        yValueMapper: (ChartSampleData data, _) => data.yValue,
-        pointColorMapper: (ChartSampleData data, _) => data.pointColor,
+        xValueMapper: (EachDayData data, _) => data.xDate,
+        yValueMapper: (EachDayData data, _) => data.yValue,
+//        pointColorMapper: (EachDayData data, _) => data.pointColor,
+        pointColorMapper: (EachDayData data, _) => Colors.pink[200],
         dataLabelSettings: DataLabelSettings(isVisible: true),
       )
     ];
   }
-}
-
-class ChartSampleData {
-  ChartSampleData({this.x, this.yValue, this.pointColor});
-
-  final String x;
-  final double yValue;
-  final Color pointColor;
 }

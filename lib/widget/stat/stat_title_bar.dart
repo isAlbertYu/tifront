@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.dart';
+import 'package:tifront/widget/stat/models/cells_block_rfr_btn_model.dart';
 
-class ArticleListTitleBar extends StatelessWidget {
+class StatTitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,11 +20,11 @@ class ArticleListTitleBar extends StatelessWidget {
           flex: 6,
           child: Container(
             child: Text(
-              '近七日文章列表',
+              '实时监控数据',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black87,
-                fontSize: 20.0,
+                fontSize: 22.0,
                 height: 2.0,
                 fontFamily: "serif",
                 fontStyle: FontStyle.normal,
@@ -37,7 +37,10 @@ class ArticleListTitleBar extends StatelessWidget {
         ),
         Expanded(
           flex: 1,
-          child: RotationRefreshIconButton(),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: RotationRefreshIconButton(),
+          ),
         ),
       ],
     );
@@ -79,15 +82,12 @@ class _RotationRefreshIconButtonState extends State<RotationRefreshIconButton>
         iconSize: 25,
         color: Colors.white,
         splashColor: Colors.transparent,
-//            hoverColor: Colors.green,
-//            highlightColor: Colors.black54,
-//            focusColor: Colors.red,
         icon: Icon(Icons.refresh),
         onPressed: () {
           controller
             ..reset()
             ..forward();
-          ArticleListRfrBtnModel model = context.read<ArticleListRfrBtnModel>();
+          CellsBlockRfrBtnModel model = context.read<CellsBlockRfrBtnModel>();
           model.refreshButtonIsClicked();
         },
       ),

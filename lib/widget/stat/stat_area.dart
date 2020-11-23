@@ -5,15 +5,8 @@ import 'package:tifront/widget/stat/graph_block.dart';
 class StatArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StatRefreshArea();
-  }
-}
-
-class StatRefreshArea extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+//      color: Colors.green,
       child: Column(
         children: [
           Flexible(

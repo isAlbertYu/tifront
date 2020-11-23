@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: Container(
-        color: Colors.black54,
+        color: Colors.white70,
         child: Container(
           margin: EdgeInsets.all(10),
 //          color: Colors.black54,

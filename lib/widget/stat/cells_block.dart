@@ -1,40 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tifront/widget/stat/grow_cell.dart';
-import 'package:tifront/widget/stat/models/cell_data.dart';
+import 'package:tifront/widget/stat/stat_title_bar.dart';
 
 class CellBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CellsDataModel>(
-      create: (context) => CellsDataModel(),
-      child: CellRefreshBlock(),
-    );
-  }
-}
-
-class CellRefreshBlock extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+        //背景
+        color: Colors.blue,
+        //设置四周圆角 角度
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
+        ),
+      ),
       child: Column(
         children: [
-//          Container(
-//            height: 10,
-//            child: RaisedButton(
-//              onPressed: () {
-//                CellsDataModel model = context.read<CellsDataModel>();
-//                model.getDataFromServer();
-//              },
-//            ),
-//          ),
+          ///统计数据区块的标题栏
+          StatTitleBar(),
           Expanded(
-            flex: 1,
-//              margin: EdgeInsets.all(10),
+            flex: 5,
             child: Row(
               children: [
                 Expanded(
@@ -53,7 +40,7 @@ class CellRefreshBlock extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 5,
             child: Row(
               children: [
                 Expanded(

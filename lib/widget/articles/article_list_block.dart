@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/widget/articles/models/article_data.dart';
-import 'package:tifront/widget/articles/models/refresh_btn_click.dart';
+import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.dart';
 
 class ArticleListBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<RefreshButtonModel>(
+    return Consumer<ArticleListRfrBtnModel>(
       ///参数 model 就是绑定的事件结果 ArticleListModel
-      builder: (BuildContext context, RefreshButtonModel _, Widget child) {
+      builder: (BuildContext context, ArticleListRfrBtnModel _, Widget child) {
         ArticleListModel articleListModel = ArticleListModel();
         return FutureBuilder(
           future: articleListModel.updateData(),
