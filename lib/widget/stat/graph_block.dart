@@ -84,6 +84,7 @@ class ChartCell extends StatelessWidget {
       {List<EachDayData> chartData}) {
     return <ColumnSeries<EachDayData, String>>[
       ColumnSeries<EachDayData, String>(
+        ///dataSource为数据list
         dataSource: chartData,
         xValueMapper: (EachDayData data, _) => data.xDate,
         yValueMapper: (EachDayData data, _) => data.yValue,
