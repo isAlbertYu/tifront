@@ -9,69 +9,45 @@ class ArticleListModel {
   List<Article> articleList = [];
   Random random = Random();
 
-  ArticleListModel() {
-//    print("ArticleListModel构造方法--");
-//    articleList.clear();
-//    for (var o in articleListData) {
-//      articleList.add(Article(
-//          title: o["title"], score: '${random.nextInt(100)}', url: o["url"]));
-////          title: o["title"],
-////          score: o["score"],
-////          url: o["url"]));
-//    }
-  }
+  ArticleListModel();
 
-  void up2() {
-    print("ArticleListModel构造方法--");
+  Future getDataFromServer() async {
+    print("从服务器拉取数据...");
     articleList.clear();
-    for (var o in articleListData) {
-      articleList.add(Article(
-          title: o["title"], score: '${random.nextInt(10)}', url: o["url"]));
-//          title: o["title"],
-//          score: o["score"],
-//          url: o["url"]));
+    dynamic jsondata = await TiHttp.getHttp("/stat_7");
+    var mydata = json.decode(jsondata) as List<dynamic>;
+    for (var i = 0; i < mydata.length; ++i) {
+      var o = mydata[i];
+      articleList
+          .add(Article(title: o["ArticleName"], score: o["Score"], url: o["URL"]));
     }
   }
 
   /// 从服务器拉取数据
   Future updateData() async {
-    print("从服务器拉取数据...");
-    articleList.clear();
-    Map<String, dynamic> jsondata = await TiHttp.getHttp("/article_list");
-    var mydata = json.decode(jsondata['mydata']) as List<dynamic>;
-    for (var i = 0; i < mydata.length; ++i) {
-      var o = mydata[i];
-      articleList
-          .add(Article(title: o["title"], score: o["score"], url: o["url"]));
-    }
+    await getDataFromServer();
   }
-
-  /// 更新数据并通知组件刷新
-//  void updateDataAndNotify() async {
-//    await this.updateData();
-//    notifyListeners();
-//  }
 
   Article getArticle(int index) => this.articleList[index];
 }
 
 class Article {
   final String title;
-  final String score;
+  final int score;
   final String url;
 
   Article({this.title, this.score, this.url});
 
-  Article.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
-        score = json['score'],
-        url = json['url'];
-
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'title': title,
-        'score': score,
-        'url': url,
-      };
+//  Article.fromJson(Map<String, dynamic> json)
+//      : title = json['title'],
+//        score = json['score'],
+//        url = json['url'];
+//
+//  Map<String, dynamic> toJson() => <String, dynamic>{
+//        'title': title,
+//        'score': score,
+//        'url': url,
+//      };
 }
 
 ///////////////////////////////////////////////////////////

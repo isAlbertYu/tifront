@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/widget/articles/models/article_data.dart';
 import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleListBlock extends StatelessWidget {
   @override
@@ -34,7 +35,11 @@ class ArticleListBlock extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          launch(
+                            articleListModel.getArticle(index).url,
+                          );
+                        },
                         color: Colors.white70,
                         hoverColor: Colors.grey,
                         child: Row(
@@ -56,7 +61,8 @@ class ArticleListBlock extends StatelessWidget {
                             Expanded(
                               flex: 13,
                               child: MyTextItem(
-                                textContent: articleListModel.getArticle(index).title,
+                                textContent:
+                                    articleListModel.getArticle(index).title,
 //                    textContent: '${itemTexts[index]["title"]}',
                                 textColor: topTextColor, //文字颜色
                               ),
@@ -66,8 +72,8 @@ class ArticleListBlock extends StatelessWidget {
                             Expanded(
                               flex: 2,
                               child: Text(
-                                articleListModel.getArticle(index).score + '分',
-//                    '${itemTexts[index]["score"]}',
+                                '${articleListModel.getArticle(index).score}分',
+                                //                    '${itemTexts[index]["score"]}',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   wordSpacing: 0.0,

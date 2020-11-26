@@ -9,13 +9,11 @@ class StatArea extends StatelessWidget {
 //      color: Colors.green,
       child: Column(
         children: [
-          Flexible(
-            fit: FlexFit.tight,
+          Expanded(
             flex: 2,
             child: CellBlock(),
           ),
-          Flexible(
-            fit: FlexFit.tight,
+          Expanded(
             flex: 2,
             child: GraphBlock(),
           ),

@@ -9,9 +9,18 @@ class TiHttp {
     ),
   );
 
-  static Future<Map<String, dynamic>> getHttp(String path) async {
+//  static Future<Map<String, dynamic>> getHttp(String path) async {
+//    try {
+//      Response<Map<String, dynamic>> response = await dio.get(path);
+//      return response.data;
+//    } catch (e) {
+//      print("我的dio错误--${e}");
+//      return null;
+//    }
+//  }
+  static Future<dynamic> getHttp(String path) async {
     try {
-      Response<Map<String, dynamic>> response = await dio.get(path);
+      Response<dynamic> response = await dio.get(path);
       return response.data;
     } catch (e) {
       print("我的dio错误--${e}");

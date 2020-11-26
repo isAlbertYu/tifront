@@ -24,15 +24,15 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             children: <Widget>[
               Flexible(
-                flex: 2,
+                flex: 3,
                 child: ArticleListArea(),
               ),
               Flexible(
-                flex: 3,
+                flex: 5,
                 child: StatArea(),
               ),
               Flexible(
-                flex: 3,
+                flex: 4,
                 child: VisualArea(),
               ),
             ],

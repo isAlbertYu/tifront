@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/util/screen_util.dart';
@@ -148,22 +147,42 @@ class StatDataText extends StatelessWidget {
         ScreenUtil scUtil = ScreenUtil.getInstance();
         scUtil.init(context);
         CellsDataModel model = CellsDataModel();
-        return Text(
-          model.getCellData(statDataTextId).number,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            wordSpacing: 0.0,
-            //单词间隙(负值可以让单词更紧凑)
-            letterSpacing: 0.0,
-            //字母间隙(负值可以让字母更紧凑)
-            fontStyle: FontStyle.normal,
-            //文字样式，斜体和正常
-            fontSize: scUtil.setSp(12),
-            //字体大小
-            fontWeight: FontWeight.w900,
-            //字体粗细  粗体和正常
-            color: Colors.white70, //文字颜色
-          ),
+        return FutureBuilder(
+          future: model.updateData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            // 请求已结束
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                // 请求失败，显示错误
+                return Text("Error: ${snapshot.error}");
+              } else {
+                // 请求成功，显示数据
+                return Text(
+                  model.getCellData(statDataTextId).number,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    wordSpacing: 0.0,
+                    //单词间隙(负值可以让单词更紧凑)
+                    letterSpacing: 0.0,
+                    //字母间隙(负值可以让字母更紧凑)
+                    fontStyle: FontStyle.normal,
+                    //文字样式，斜体和正常
+                    fontSize: scUtil.setSp(16),
+                    //字体大小
+                    fontWeight: FontWeight.w900,
+                    //字体粗细  粗体和正常
+                    color: Colors.white70, //文字颜色
+                  ),
+                );
+              }
+            } else {
+              // 请求未结束，显示loading
+              return CircularProgressIndicator(
+                backgroundColor: Colors.white,
+                strokeWidth: 5,
+              );
+            }
+          },
         );
       },
     );

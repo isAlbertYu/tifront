@@ -11,13 +11,20 @@ import 'package:tifront/util/screen_util.dart';
 //];
 
 class Global {
-  BuildContext context;
-  ScreenUtil scrUtil;
+  static ScreenUtil scrUtil;
 
-  Global({@required this.context});//初始化全局信息，会在APP启动时执行
+//  factory Global(BuildContext context) {
+//    return  Global._setScrUtil(context);
+//  }
+//
+//  Global._setScrUtil(BuildContext context) {
+//    this.scrUtil = ScreenUtil.getInstance()..init(context);
+//  }
 
-  Future init() async {
-    scrUtil = ScreenUtil.getInstance();
-    scrUtil.init(context);
+  //初始化全局信息，会在APP启动时执行
+  static init(BuildContext context) {
+    Global.scrUtil = ScreenUtil.getInstance()
+      ..init(context);
   }
+
 }

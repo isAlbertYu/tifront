@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Awesome go-echarts</title>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts-wordcloud.min.js"></script>
+    <link href="https://go-echarts.github.io/go-echarts-assets/assets/bulma.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="item" id="VTzVdfWiEOLq"
+         style="width:300px;height:300px;"></div>
+</div>
+<script type="text/javascript">
+    "use strict";
+    var myChart_VTzVdfWiEOLq = echarts.init(document.getElementById('VTzVdfWiEOLq'), "white");
+    var option_VTzVdfWiEOLq ={
+    tooltip: {
+        show: true
+    },
+    series: [{
+        type: "wordCloud",
+        gridSize:6,
+        shape:'diamond',
+        sizeRange: [12, 50],
+        width:800,
+        height:500,
+        textStyle: {
+            normal: {
+                color: function() {
+                    return 'rgb(' + [
+                        Math.round(Math.random() * 160),
+                        Math.round(Math.random() * 160),
+                        Math.round(Math.random() * 160)
+                    ].join(',') + ')';
+                }
+            },
+            emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+            }
+        },
+        data: [{
+                name: " 没有",
+                value: 30,
+            },
+            {
+                name: " 屏幕",
+                value: 24
+            },
+            {
+                name: " 不错",
+                value: 21
+            },
+            {
+                name: " 可以",
+                value: 19
+            },
+            {
+                name: " 发货",
+                value: 18
+            },
+            {
+                name: " 拆过",
+                value: 1
+            }
+        ],
+    }]
+
+};
+    myChart_VTzVdfWiEOLq.setOption(option_VTzVdfWiEOLq);
+</script>
+
+<style>
+    .container {margin-top:30px; display: flex;justify-content: center;align-items: center;}
+    .item {margin: auto;}
+</style>
+</body>
+</html>

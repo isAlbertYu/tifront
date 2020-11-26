@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-/// Chart import
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:tifront/widget/visual/wordcloud_title_bar.dart';
 
 class WordCloudBlock extends StatefulWidget {
   @override
@@ -9,120 +10,143 @@ class WordCloudBlock extends StatefulWidget {
 }
 
 class _WordCloudBlockState extends State<WordCloudBlock> {
-  bool isCardView = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(5),
-      color: Colors.white,
-      child: SfCartesianChart(
-        plotAreaBorderWidth: 0,
-        title:
-            ChartTitle(text: isCardView ? '' : 'Monthly expense of a family'),
-        legend: Legend(isVisible: !isCardView),
-        primaryXAxis: CategoryAxis(
-          majorGridLines: MajorGridLines(width: 0),
-          labelRotation: isCardView ? 0 : -45,
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+        //背景
+        color: Colors.blue,
+        //设置四周圆角 角度
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
         ),
-        primaryYAxis: NumericAxis(
-            maximum: 200,
-            axisLine: AxisLine(width: 0),
-            labelFormat: '\${value}',
-            majorTickLines: MajorTickLines(size: 0)),
-        series: _getStackedLineSeries(),
-        trackballBehavior: TrackballBehavior(
-          enable: true,
-          activationMode: ActivationMode.singleTap,
+      ),
+      child: Column(
+        children: [
+          WordcloudTitleBar(),
+          Expanded(
+            child: WordcloudCell(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class WordcloudCell extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      width: double.infinity,
+      child: SingleChildScrollView(
+        child: WordClip(),
+      ),
+      decoration: BoxDecoration(
+//        color: Colors.pink,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
         ),
       ),
     );
   }
 }
 
-List<StackedLineSeries<ChartSampleData, String>> _getStackedLineSeries() {
-  final List<ChartSampleData> chartData = <ChartSampleData>[
-    ChartSampleData(
-        x: 'Food',
-        y: 55,
-        yValue: 40,
-        secondSeriesYValue: 45,
-        thirdSeriesYValue: 48),
-    ChartSampleData(
-        x: 'Transport',
-        y: 33,
-        yValue: 45,
-        secondSeriesYValue: 54,
-        thirdSeriesYValue: 28),
-    ChartSampleData(
-        x: 'Medical',
-        y: 43,
-        yValue: 23,
-        secondSeriesYValue: 20,
-        thirdSeriesYValue: 34),
-    ChartSampleData(
-        x: 'Clothes',
-        y: 32,
-        yValue: 54,
-        secondSeriesYValue: 23,
-        thirdSeriesYValue: 54),
-    ChartSampleData(
-        x: 'Books',
-        y: 56,
-        yValue: 18,
-        secondSeriesYValue: 43,
-        thirdSeriesYValue: 55),
-    ChartSampleData(
-        x: 'Others',
-        y: 23,
-        yValue: 54,
-        secondSeriesYValue: 33,
-        thirdSeriesYValue: 56),
-  ];
-  return <StackedLineSeries<ChartSampleData, String>>[
-    StackedLineSeries<ChartSampleData, String>(
-        width: 2,
-        dataSource: chartData,
-        xValueMapper: (ChartSampleData chartSampleData, _) => chartSampleData.x,
-        yValueMapper: (ChartSampleData chartSampleData, _) => chartSampleData.y,
-        name: 'Rony',
-        markerSettings: MarkerSettings(isVisible: true)),
-    StackedLineSeries<ChartSampleData, String>(
-        dataSource: chartData,
-        xValueMapper: (ChartSampleData chartSampleData, _) => chartSampleData.x,
-        yValueMapper: (ChartSampleData chartSampleData, _) =>
-            chartSampleData.yValue,
-        name: 'Kigy',
-        markerSettings: MarkerSettings(isVisible: true)),
-    StackedLineSeries<ChartSampleData, String>(
-        dataSource: chartData,
-        xValueMapper: (ChartSampleData chartSampleData, _) => chartSampleData.x,
-        yValueMapper: (ChartSampleData chartSampleData, _) =>
-            chartSampleData.secondSeriesYValue,
-        name: 'Sony',
-        markerSettings: MarkerSettings(isVisible: true)),
-    StackedLineSeries<ChartSampleData, String>(
-        dataSource: chartData,
-        xValueMapper: (ChartSampleData chartSampleData, _) => chartSampleData.x,
-        yValueMapper: (ChartSampleData chartSampleData, _) =>
-            chartSampleData.thirdSeriesYValue,
-        name: 'Caky',
-        markerSettings: MarkerSettings(isVisible: true))
-  ];
+class WordClip extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.spaceEvenly,
+      spacing: 5, //主轴上子控件的间距
+      runSpacing: 5, //交叉轴上子控件之间的间距
+      children: [
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好啊啊啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+        MyClip(text: "大啊"),
+        MyClip(text: "大家啊啊好"),
+        MyClip(text: "大家好"),
+      ], //要显示的子控件集合
+    );
+  }
 }
 
-class ChartSampleData {
-  ChartSampleData(
-      {this.x,
-      this.y,
-      this.yValue,
-      this.secondSeriesYValue,
-      this.thirdSeriesYValue});
+class MyClip extends StatelessWidget {
+  final String text;
+  String avatartext;
+  double textSize;
 
-  final String x;
-  final double y;
-  final double yValue;
-  final double secondSeriesYValue;
-  final double thirdSeriesYValue;
+  MyClip({@required this.text}) {
+    Random random = Random();
+    int score = random.nextInt(9) + 1;
+    avatartext = "$score";
+    textSize = 14 + score * 1.6;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RawChip(
+      avatar: CircleAvatar(
+        backgroundColor: Colors.primaries[Random().nextInt(17)],
+        child: Text(
+          avatartext,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontSize: textSize,
+          ),
+        ),
+      ),
+      label: Text(
+        this.text,
+        style: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w900,
+          fontSize: textSize,
+        ),
+      ),
+      elevation: 8,
+      tapEnabled: true,
+      onPressed: () {},
+      onSelected: null,
+    );
+  }
 }
