@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:tifront/common/global.dart';
-import 'package:tifront/util/screen_util.dart';
 import 'package:tifront/widget/common/rota_rfr_ico_btn.dart' as comm;
-import 'dart:math' as math;
+import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
 
 class WordcloudTitleBar extends StatelessWidget {
   @override
@@ -67,7 +63,7 @@ class _FlipIconButtonState extends State<FlipIconButton>
   initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 100), vsync: this);
+        duration: const Duration(milliseconds: 200), vsync: this);
     //大小从1倍到2倍
     animation = Tween(begin: 1.0, end: 1.5).animate(
       CurvedAnimation(
@@ -106,7 +102,6 @@ class _FlipIconButtonState extends State<FlipIconButton>
                     title: "哈哈哈哈",
                     content: "我是内容",
                   );
-                  ;
                 },
               );
             },
@@ -129,84 +124,5 @@ class _FlipIconButtonState extends State<FlipIconButton>
     //路由销毁时需要释放动画资源
     controller.dispose();
     super.dispose();
-  }
-}
-
-class MyDialog extends Dialog {
-  String title;
-  String content;
-
-  MyDialog({this.title, this.content});
-
-  _showTimer(context) {
-    var timer;
-    timer = Timer.periodic(
-      Duration(seconds: 3),
-      (t) {
-        print("关闭");
-        Navigator.pop(context);
-        t.cancel();
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-//    _showTimer(context);
-    ScreenUtil scrUtil = ScreenUtil()..init(context);
-    return Material(
-      type: MaterialType.transparency,
-      child: Center(
-        child: Container(
-          height: scrUtil.setHeight(1500),
-          width: scrUtil.setWidth(500),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Stack(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text("${this.title}"),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        child: Icon(Icons.close),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                thickness: 3,
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(10),
-                height: 200,
-                width: double.infinity,
-                color: Colors.blue,
-                child: Text(
-                  "${this.content}",
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

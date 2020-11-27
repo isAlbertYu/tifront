@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tifront/util/screen_util.dart';
+import 'package:tifront/widget/visual/models/wordcloud_data.dart';
+import 'package:tifront/widget/visual/models/wordcloud_rfr_btn_model.dart';
 import 'package:tifront/widget/visual/wordcloud_title_bar.dart';
 
 class WordCloudBlock extends StatefulWidget {
@@ -42,7 +46,7 @@ class WordcloudCell extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
       width: double.infinity,
       child: SingleChildScrollView(
-        child: WordClip(),
+        child: WordWrap(),
       ),
       decoration: BoxDecoration(
 //        color: Colors.pink,
@@ -54,99 +58,44 @@ class WordcloudCell extends StatelessWidget {
   }
 }
 
-class WordClip extends StatelessWidget {
+class WordWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.spaceEvenly,
-      spacing: 5, //主轴上子控件的间距
-      runSpacing: 5, //交叉轴上子控件之间的间距
-      children: [
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好啊啊啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-        MyClip(text: "大啊"),
-        MyClip(text: "大家啊啊好"),
-        MyClip(text: "大家好"),
-      ], //要显示的子控件集合
-    );
-  }
-}
-
-class MyClip extends StatelessWidget {
-  final String text;
-  String avatartext;
-  double textSize;
-
-  MyClip({@required this.text}) {
-    Random random = Random();
-    int score = random.nextInt(9) + 1;
-    avatartext = "$score";
-    textSize = 14 + score * 1.6;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return RawChip(
-      avatar: CircleAvatar(
-        backgroundColor: Colors.primaries[Random().nextInt(17)],
-        child: Text(
-          avatartext,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w900,
-            fontSize: textSize,
-          ),
-        ),
-      ),
-      label: Text(
-        this.text,
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.w900,
-          fontSize: textSize,
-        ),
-      ),
-      elevation: 8,
-      tapEnabled: true,
-      onPressed: () {},
-      onSelected: null,
+    return Consumer<WordcloudRfrBtnModel>(
+      ///参数 model 就是绑定的事件结果 ArticleListModel
+      builder: (BuildContext context, WordcloudRfrBtnModel _, Widget child) {
+        ScreenUtil scUtil = ScreenUtil.getInstance();
+        scUtil.init(context);
+        WordcloudDataModel model = Provider.of<WordcloudDataModel>(context);
+        return FutureBuilder(
+          future: model.updateData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            // 请求已结束
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                // 请求失败，显示错误
+                return Text("Error: ${snapshot.error}");
+              } else {
+                // 请求成功，显示数据
+                return Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  spacing: 5, //主轴上子控件的间距
+                  runSpacing: 5, //交叉轴上子控件之间的间距
+                  children: model.weightWordClipList, //要显示的子控件集合
+                );
+              }
+            } else {
+              // 请求未结束，显示loading
+              return UnconstrainedBox(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  strokeWidth: 5,
+                ),
+              );
+            }
+          },
+        );
+      },
     );
   }
 }

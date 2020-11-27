@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
 class TestPage extends StatefulWidget {
   @override
   _TestPageState createState() => _TestPageState();
@@ -13,13 +15,9 @@ class _TestPageState extends State<TestPage> {
         title: Text("威胁情报监控系统"),
         centerTitle: true,
       ),
-      body: Container(
-        color: Colors.black54,
-        child: Container(
-          margin: EdgeInsets.all(10),
-//          color: Colors.black54,
-          child: ScaleAnimationRoute(),
-        ),
+      body: MyDialog(
+        title: "哈哈哈哈",
+        content: "我是内容",
       ),
     );
   }

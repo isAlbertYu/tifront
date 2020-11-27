@@ -3,6 +3,8 @@ import 'package:provider/single_child_widget.dart';
 import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.dart';
 import 'package:tifront/widget/stat/models/cells_block_rfr_btn_model.dart';
 import 'package:tifront/widget/stat/models/graph_block_rfr_btn_model.dart';
+import 'package:tifront/widget/visual/models/wordcloud_data.dart';
+import 'package:tifront/widget/visual/models/wordcloud_rfr_btn_model.dart';
 
 List<SingleChildWidget> providers = [
   ChangeNotifierProvider<CellsBlockRfrBtnModel>(
@@ -13,5 +15,11 @@ List<SingleChildWidget> providers = [
   ),
   ChangeNotifierProvider<GraphBlockRfrBtnModel>(
     create: (context) => GraphBlockRfrBtnModel(),
+  ),
+  ChangeNotifierProvider<WordcloudRfrBtnModel>(
+    create: (context) => WordcloudRfrBtnModel(),
+  ),
+  ChangeNotifierProvider<WordcloudDataModel>(
+    create: (context) => WordcloudDataModel(),
   ),
 ];
