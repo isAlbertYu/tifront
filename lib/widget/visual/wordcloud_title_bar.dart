@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tifront/widget/common/rota_rfr_ico_btn.dart' as comm;
+import 'package:tifront/widget/visual/models/wordcloud_data.dart';
 import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
 
 class WordcloudTitleBar extends StatelessWidget {
@@ -98,9 +100,17 @@ class _FlipIconButtonState extends State<FlipIconButton>
               showDialog(
                 context: context,
                 builder: (context) {
+                  List<WeightWord> _weightWordList = [];
+                  Provider.of<WordcloudDataModel>(context)
+                      .weightWordList
+                      .forEach((element) {
+                    _weightWordList.add(
+                        WeightWord(weight: element.weight, word: element.word));
+                  });
                   return MyDialog(
                     title: "哈哈哈哈",
                     content: "我是内容",
+                    weightWordList: _weightWordList,
                   );
                 },
               );

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tifront/common/http.dart';
 
-class WordcloudDataModel extends ChangeNotifier{
+class WordcloudDataModel extends ChangeNotifier {
   List<WeightWord> weightWordList = [];
   List<WeightWordClip> weightWordClipList = [];
 
@@ -26,6 +26,12 @@ class WordcloudDataModel extends ChangeNotifier{
 
   Future updateData() async {
     await getDataFromServer();
+  }
+
+  void removeAtIndex(int index) {
+    weightWordList.removeAt(index);
+    weightWordClipList.removeAt(index);
+    notifyListeners();
   }
 }
 
