@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/widget/common/rota_rfr_ico_btn.dart' as comm;
+import 'package:tifront/widget/visual/models/weightword_copy_data.dart';
 import 'package:tifront/widget/visual/models/wordcloud_data.dart';
 import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
 
@@ -51,7 +52,7 @@ class WordcloudTitleBar extends StatelessWidget {
   }
 }
 
-/// 自定义的旋转刷新按钮
+/// 自定义的弹动编辑按钮
 class FlipIconButton extends StatefulWidget {
   @override
   _FlipIconButtonState createState() => new _FlipIconButtonState();
@@ -91,7 +92,7 @@ class _FlipIconButtonState extends State<FlipIconButton>
             splashRadius: 20,
             iconSize: 25,
             color: Colors.white,
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.edit_outlined),
             onPressed: () {
               controller
                 ..reset()
@@ -100,17 +101,17 @@ class _FlipIconButtonState extends State<FlipIconButton>
               showDialog(
                 context: context,
                 builder: (context) {
-                  List<WeightWord> _weightWordList = [];
+                  WeightwordCopyData model =
+                      Provider.of<WeightwordCopyData>(context, listen: false);
+                  model.clearAll();
                   Provider.of<WordcloudDataModel>(context)
                       .weightWordList
                       .forEach((element) {
-                    _weightWordList.add(
+                    model.weightWordList.add(
                         WeightWord(weight: element.weight, word: element.word));
                   });
                   return MyDialog(
-                    title: "哈哈哈哈",
-                    content: "我是内容",
-                    weightWordList: _weightWordList,
+                    weightwordCopyData: model,
                   );
                 },
               );

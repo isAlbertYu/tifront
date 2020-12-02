@@ -28,18 +28,49 @@ class WordcloudDataModel extends ChangeNotifier {
     await getDataFromServer();
   }
 
-  void removeAtIndex(int index) {
-    weightWordList.removeAt(index);
-    weightWordClipList.removeAt(index);
+  void updateDataFromCopy(List<WeightWord> copyList) async {
+    this.weightWordList.clear();
+    this.weightWordClipList.clear();
+    print('copyList.length=${copyList.length}');
+    for (var i = 0; i < copyList.length; ++i) {
+      var o = copyList[i];
+      this.weightWordList.add(WeightWord(word: o.word, weight: o.weight));
+      this
+          .weightWordClipList
+          .add(WeightWordClip(word: o.word, weight: o.weight));
+    }
+    await sendDataToServer();
+    notifyListeners();
+  }
+
+  /// 发送数据给服务器
+  Future sendDataToServer() async {
+    Map<String, dynamic> jsonData = Map();
+    jsonData["data"] = json.encode(this.weightWordList);
+    print('this.weightWordList=${this.weightWordList.length}');
+    dynamic rtData = await TiHttp.postHttp('/stat_13', jsonData);
+    var myData = json.decode(rtData) as Map<String, dynamic>;
+    print('rtData=$myData');
+  }
+
+  void addAItem() {
+    this.weightWordList.add(WeightWord(word: '', weight: 0));
     notifyListeners();
   }
 }
 
 class WeightWord {
-  final String word;
-  final int weight;
+  String word;
+  int weight;
 
   WeightWord({this.word, this.weight});
+
+  Map toJson() {
+    Map map = Map();
+    map["word"] = this.word;
+    map["weight"] = this.weight;
+    return map;
+  }
 }
 
 class WeightWordClip extends StatelessWidget {

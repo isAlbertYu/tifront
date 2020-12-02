@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
+
 class TestPage extends StatefulWidget {
   @override
   _TestPageState createState() => _TestPageState();
@@ -15,10 +16,7 @@ class _TestPageState extends State<TestPage> {
         title: Text("威胁情报监控系统"),
         centerTitle: true,
       ),
-      body: MyDialog(
-        title: "哈哈哈哈",
-        content: "我是内容",
-      ),
+      body: MyDialog(),
     );
   }
 }
@@ -51,7 +49,6 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
           setState(() => {});
         },
       );
-
   }
 
   @override
@@ -66,9 +63,11 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
 //          hoverColor: Colors.blue,
 //          highlightColor: Colors.blue,
           icon: Icon(Icons.refresh),
-          onPressed: (){
+          onPressed: () {
             //启动动画(正向执行)
-            controller..reset()..forward();
+            controller
+              ..reset()
+              ..forward();
             print("animation.value ${animation.value}");
           },
         ),

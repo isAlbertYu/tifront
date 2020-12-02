@@ -61,12 +61,15 @@ class WordcloudCell extends StatelessWidget {
 class WordWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Consumer<WordcloudRfrBtnModel>(
       ///参数 model 就是绑定的事件结果 ArticleListModel
       builder: (BuildContext context, WordcloudRfrBtnModel _, Widget child) {
-        ScreenUtil scUtil = ScreenUtil.getInstance();
-        scUtil.init(context);
-        WordcloudDataModel model = Provider.of<WordcloudDataModel>(context);
+
+        WordcloudDataModel model =
+            Provider.of<WordcloudDataModel>(context, listen: false);
+
+        print('WordWrap 重绘');
         return FutureBuilder(
           future: model.updateData(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -77,12 +80,16 @@ class WordWrap extends StatelessWidget {
                 return Text("Error: ${snapshot.error}");
               } else {
                 // 请求成功，显示数据
-                return Wrap(
-                  alignment: WrapAlignment.spaceEvenly,
-                  spacing: 5, //主轴上子控件的间距
-                  runSpacing: 5, //交叉轴上子控件之间的间距
-                  children: model.weightWordClipList, //要显示的子控件集合
-                );
+                return Consumer<WordcloudDataModel>(
+                  ///参数 model 就是绑定的事件结果 ArticleListModel
+                  builder: (BuildContext context, WordcloudDataModel model, Widget child) {
+                    return Wrap(
+                      alignment: WrapAlignment.spaceEvenly,
+                      spacing: 5, //主轴上子控件的间距
+                      runSpacing: 5, //交叉轴上子控件之间的间距
+                      children: model.weightWordClipList, //要显示的子控件集合
+                    );
+                  },);
               }
             } else {
               // 请求未结束，显示loading
