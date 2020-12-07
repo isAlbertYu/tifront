@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tifront/widget/visual/pie_block.dart';
-import 'package:tifront/widget/visual/wordcloud_block.dart';
+import 'package:tifront/widget/visual/weightword_block.dart';
 
 
 class VisualArea extends StatefulWidget {

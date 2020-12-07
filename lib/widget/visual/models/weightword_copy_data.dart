@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tifront/widget/visual/models/wordcloud_data.dart';
+import 'package:tifront/widget/visual/models/weightword_data.dart';
 
 //是权重关键词的一个副本，可以对其进行增删改，但不影响原数据。当点击提交修改时，更新原数据并发送至服务器
 class WeightwordCopyData extends ChangeNotifier {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
+import 'package:tifront/widget/visual/weightword_edit_dialog.dart';
 
 class TestPage extends StatefulWidget {
   @override
@@ -34,8 +34,8 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
 
   initState() {
     super.initState();
-    controller = new AnimationController(
-        duration: const Duration(seconds: 1), vsync: this);
+    controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
     //使用弹性曲线
 
     //图片宽高从0变到300

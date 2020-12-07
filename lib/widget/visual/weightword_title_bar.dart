@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/widget/common/rota_rfr_ico_btn.dart' as comm;
 import 'package:tifront/widget/visual/models/weightword_copy_data.dart';
-import 'package:tifront/widget/visual/models/wordcloud_data.dart';
-import 'package:tifront/widget/visual/wordcloud_edit_dialog.dart';
+import 'package:tifront/widget/visual/models/weightword_data.dart';
+import 'package:tifront/widget/visual/weightword_edit_dialog.dart';
 
 class WordcloudTitleBar extends StatelessWidget {
   @override

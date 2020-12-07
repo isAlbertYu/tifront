@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tifront/util/screen_util.dart';
-import 'package:tifront/widget/visual/models/wordcloud_data.dart';
-import 'package:tifront/widget/visual/models/wordcloud_rfr_btn_model.dart';
-import 'package:tifront/widget/visual/wordcloud_title_bar.dart';
+import 'package:tifront/widget/visual/models/weightword_data.dart';
+import 'package:tifront/widget/visual/models/weightword_rfr_btn_model.dart';
+import 'package:tifront/widget/visual/weightword_title_bar.dart';
 
 class WordCloudBlock extends StatefulWidget {
   @override

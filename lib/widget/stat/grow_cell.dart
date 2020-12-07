@@ -12,7 +12,7 @@ class StatCell extends StatefulWidget {
   StatCell({@required this.title, @required this.statCellId});
 
   @override
-  _StatCellState createState() => new _StatCellState();
+  _StatCellState createState() => _StatCellState();
 }
 
 class _StatCellState extends State<StatCell>

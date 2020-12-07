@@ -8,7 +8,7 @@ import 'package:tifront/route/routes.dart';
 import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.dart';
 import 'package:tifront/widget/stat/models/cells_block_rfr_btn_model.dart';
 import 'package:tifront/widget/stat/models/graph_block_rfr_btn_model.dart';
-import 'package:tifront/widget/visual/models/wordcloud_rfr_btn_model.dart';
+import 'package:tifront/widget/visual/models/weightword_rfr_btn_model.dart';
 
 void main() {
 //  debugPaintSizeEnabled = !true;

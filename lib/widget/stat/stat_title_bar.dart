@@ -51,7 +51,7 @@ class StatTitleBar extends StatelessWidget {
 class RotationRefreshIconButton extends StatefulWidget {
   @override
   _RotationRefreshIconButtonState createState() =>
-      new _RotationRefreshIconButtonState();
+      _RotationRefreshIconButtonState();
 }
 
 class _RotationRefreshIconButtonState extends State<RotationRefreshIconButton>

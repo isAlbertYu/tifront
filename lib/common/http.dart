@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class TiHttp {
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: "http://localhost:9999",
+      baseUrl: "http://localhost:8080/v1",
       connectTimeout: 5000,
       receiveTimeout: 3000,
     ),

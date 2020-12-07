@@ -4,8 +4,8 @@ import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.
 import 'package:tifront/widget/stat/models/cells_block_rfr_btn_model.dart';
 import 'package:tifront/widget/stat/models/graph_block_rfr_btn_model.dart';
 import 'package:tifront/widget/visual/models/weightword_copy_data.dart';
-import 'package:tifront/widget/visual/models/wordcloud_data.dart';
-import 'package:tifront/widget/visual/models/wordcloud_rfr_btn_model.dart';
+import 'package:tifront/widget/visual/models/weightword_data.dart';
+import 'package:tifront/widget/visual/models/weightword_rfr_btn_model.dart';
 
 List<SingleChildWidget> providers = [
   ChangeNotifierProvider<CellsBlockRfrBtnModel>(

@@ -60,9 +60,6 @@ class ChartCell extends StatelessWidget {
       },
     );
   }
-
-  /// Returns the list of chart series which need to render on the column chart.
-
 }
 
 class GraphChart extends StatelessWidget {
@@ -73,53 +70,53 @@ class GraphChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-        title: ChartTitle(
-          text: '近15日文章采集量',
-          textStyle: TextStyle(
-            color: Colors.black87,
-            fontSize: 18.0,
-            height: 2.0,
-            fontFamily: "serif",
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w900,
-            decoration: TextDecoration.none,
-            decorationStyle: TextDecorationStyle.dashed,
-          ),
+      title: ChartTitle(
+        text: '近15日文章采集量',
+        textStyle: TextStyle(
+          color: Colors.black87,
+          fontSize: 18.0,
+          height: 2.0,
+          fontFamily: "serif",
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w900,
+          decoration: TextDecoration.none,
+          decorationStyle: TextDecorationStyle.dashed,
         ),
-        legend: Legend(
-          textStyle: TextStyle(
-            wordSpacing: 0.0,
-            //单词间隙(负值可以让单词更紧凑)
-            letterSpacing: 0.0,
-            //字母间隙(负值可以让字母更紧凑)
-            fontStyle: FontStyle.normal,
-            //文字样式，斜体和正常
-            fontSize: 15.0,
-            //字体大小
-            fontWeight: FontWeight.w900,
-            //字体粗细  粗体和正常
-            color: Colors.black, //文字颜色
-          ),
-          isVisible: true,
-          position: LegendPosition.top,
+      ),
+      legend: Legend(
+        textStyle: TextStyle(
+          wordSpacing: 0.0,
+          //单词间隙(负值可以让单词更紧凑)
+          letterSpacing: 0.0,
+          //字母间隙(负值可以让字母更紧凑)
+          fontStyle: FontStyle.normal,
+          //文字样式，斜体和正常
+          fontSize: 15.0,
+          //字体大小
+          fontWeight: FontWeight.w900,
+          //字体粗细  粗体和正常
+          color: Colors.black, //文字颜色
+        ),
+        isVisible: true,
+        position: LegendPosition.top,
 //                    title: LegendTitle(text: "aaa",),
-        ),
-        plotAreaBorderWidth: 0,
-        primaryXAxis: CategoryAxis(
-          majorGridLines: MajorGridLines(width: 0),
-        ),
-        primaryYAxis: NumericAxis(
-          minimum: 0,
-          maximum: model.getMaxValue().toDouble(),
-          isVisible: false,
-          labelFormat: '{value}',
-        ),
-        series: _getCategory(chartData: model.chartData),
-        tooltipBehavior: TooltipBehavior(
-          enable: true,
-          header: '',
-          canShowMarker: false,
-        ),
+      ),
+      plotAreaBorderWidth: 0,
+      primaryXAxis: CategoryAxis(
+        majorGridLines: MajorGridLines(width: 0),
+      ),
+      primaryYAxis: NumericAxis(
+        minimum: 0,
+        maximum: model.getMaxValue().toDouble(),
+        isVisible: false,
+        labelFormat: '{value}',
+      ),
+      series: _getCategory(chartData: model.chartData),
+      tooltipBehavior: TooltipBehavior(
+        enable: true,
+        header: '',
+        canShowMarker: false,
+      ),
     );
   }
 
