@@ -12,7 +12,7 @@ class _VisualAreaState extends State<VisualArea> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellow,
+//      color: Colors.yellow,
       child: Column(
         children: [
           Flexible(

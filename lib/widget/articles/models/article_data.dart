@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:tifront/common/http.dart';
-import 'package:tifront/data/article_data.dart';
 
 class ArticleListModel {
   /// Internal, private state of the cart.
@@ -15,7 +14,7 @@ class ArticleListModel {
     print("从服务器拉取数据...");
     articleList.clear();
     dynamic jsondata = await TiHttp.getHttp("/stat_7");
-    var mydata = json.decode(jsondata) as List<dynamic>;
+    var mydata = jsondata as List<dynamic>;
     for (var i = 0; i < mydata.length; ++i) {
       var o = mydata[i];
       articleList

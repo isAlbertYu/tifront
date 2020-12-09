@@ -158,7 +158,7 @@ class StatDataText extends StatelessWidget {
               } else {
                 // 请求成功，显示数据
                 return Text(
-                  model.getCellData(statDataTextId).number,
+                  "${model.getCellData(statDataTextId).number}",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     wordSpacing: 0.0,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tifront/util/screen_util.dart';
 import 'package:tifront/widget/common/rota_rfr_ico_btn.dart' as comm;
+import 'package:tifront/widget/common/title_bar_textstyle.dart';
 import 'package:tifront/widget/visual/models/weightword_copy_data.dart';
 import 'package:tifront/widget/visual/models/weightword_data.dart';
 import 'package:tifront/widget/visual/weightword_edit_dialog.dart';
@@ -25,16 +27,7 @@ class WordcloudTitleBar extends StatelessWidget {
             child: Text(
               '带权关键词',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 22.0,
-                height: 2.0,
-                fontFamily: "serif",
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w900,
-                decoration: TextDecoration.none,
-                decorationStyle: TextDecorationStyle.dashed,
-              ),
+              style: titleBarTextStyle(ScreenUtil.instance..init(context)),
             ),
           ),
         ),

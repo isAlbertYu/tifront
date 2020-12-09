@@ -22,7 +22,7 @@ class GraphDataModel {
     print("从服务器拉取数据...");
     chartData.clear();
     dynamic jsondata = await TiHttp.getHttp("/stat_11");
-    var mydata = json.decode(jsondata) as List<dynamic>;
+    var mydata = jsondata as List<dynamic>;
 
     for (var i = 0; i < mydata.length; ++i) {
       var o = mydata[i];

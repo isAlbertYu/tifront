@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 /// Chart import
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tifront/util/screen_util.dart';
+import 'package:tifront/widget/common/title_bar_textstyle.dart';
 import 'package:tifront/widget/stat/models/graph_block_rfr_btn_model.dart';
 import 'package:tifront/widget/stat/models/graph_data.dart';
 
@@ -12,10 +13,10 @@ class GraphBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 0),
 //      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Color(0xFF90d7ec),
         borderRadius: BorderRadius.all(
           Radius.circular(10.0),
         ),
@@ -72,16 +73,7 @@ class GraphChart extends StatelessWidget {
     return SfCartesianChart(
       title: ChartTitle(
         text: '近15日文章采集量',
-        textStyle: TextStyle(
-          color: Colors.black87,
-          fontSize: 18.0,
-          height: 2.0,
-          fontFamily: "serif",
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w900,
-          decoration: TextDecoration.none,
-          decorationStyle: TextDecorationStyle.dashed,
-        ),
+        textStyle: titleBarTextStyle(ScreenUtil.instance..init(context)),
       ),
       legend: Legend(
         textStyle: TextStyle(
@@ -91,9 +83,9 @@ class GraphChart extends StatelessWidget {
           //字母间隙(负值可以让字母更紧凑)
           fontStyle: FontStyle.normal,
           //文字样式，斜体和正常
-          fontSize: 15.0,
+          fontSize: 17.0,
           //字体大小
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.w500,
           //字体粗细  粗体和正常
           color: Colors.black, //文字颜色
         ),
@@ -104,6 +96,19 @@ class GraphChart extends StatelessWidget {
       plotAreaBorderWidth: 0,
       primaryXAxis: CategoryAxis(
         majorGridLines: MajorGridLines(width: 0),
+        labelStyle: TextStyle(
+          wordSpacing: 0.0,
+          //单词间隙(负值可以让单词更紧凑)
+          letterSpacing: 0.0,
+          //字母间隙(负值可以让字母更紧凑)
+          fontStyle: FontStyle.normal,
+          //文字样式，斜体和正常
+          fontSize: 10.0,
+          //字体大小
+          fontWeight: FontWeight.w900,
+          //字体粗细  粗体和正常
+          color: Colors.black, //文字颜色
+        ),
       ),
       primaryYAxis: NumericAxis(
         minimum: 0,
@@ -133,7 +138,22 @@ class GraphChart extends StatelessWidget {
         yValueMapper: (EachDayData data, _) => data.yValue1,
 //        pointColorMapper: (EachDayData data, _) => data.pointColor,
         pointColorMapper: (EachDayData data, _) => Colors.red,
-        dataLabelSettings: DataLabelSettings(isVisible: true),
+        dataLabelSettings: DataLabelSettings(
+          isVisible: true,
+          textStyle: TextStyle(
+            wordSpacing: 0.0,
+            //单词间隙(负值可以让单词更紧凑)
+            letterSpacing: 0.0,
+            //字母间隙(负值可以让字母更紧凑)
+            fontStyle: FontStyle.normal,
+            //文字样式，斜体和正常
+            fontSize: 15.0,
+            //字体大小
+            fontWeight: FontWeight.w900,
+            //字体粗细  粗体和正常
+            color: Colors.black, //文字颜色
+          ),
+        ),
         name: '采集量',
       ),
       ColumnSeries<EachDayData, String>(
@@ -145,7 +165,22 @@ class GraphChart extends StatelessWidget {
         yValueMapper: (EachDayData data, _) => data.yValue2,
 //        pointColorMapper: (EachDayData data, _) => data.pointColor,
         pointColorMapper: (EachDayData data, _) => Colors.green,
-        dataLabelSettings: DataLabelSettings(isVisible: true),
+        dataLabelSettings: DataLabelSettings(
+          isVisible: true,
+          textStyle: TextStyle(
+            wordSpacing: 0.0,
+            //单词间隙(负值可以让单词更紧凑)
+            letterSpacing: 0.0,
+            //字母间隙(负值可以让字母更紧凑)
+            fontStyle: FontStyle.normal,
+            //文字样式，斜体和正常
+            fontSize: 15.0,
+            //字体大小
+            fontWeight: FontWeight.w900,
+            //字体粗细  粗体和正常
+            color: Colors.black, //文字颜色
+          ),
+        ),
         name: '相关量',
       )
     ];

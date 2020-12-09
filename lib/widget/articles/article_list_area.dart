@@ -8,7 +8,7 @@ class ArticleListArea extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         //背景
-        color: Colors.black54,
+        color: Color(0xFF4CAF50),
         //设置四周圆角 角度
         borderRadius: BorderRadius.all(
           Radius.circular(10.0),

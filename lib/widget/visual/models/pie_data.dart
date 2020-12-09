@@ -12,7 +12,7 @@ class PieDataModel {
     print("从服务器拉取数据...");
     pieData.clear();
     dynamic jsondata = await TiHttp.getHttp("/stat_8");
-    var mydata = json.decode(jsondata) as List<dynamic>;
+    var mydata = jsondata as List<dynamic>;
 
     for (var i = 0; i < mydata.length; ++i) {
       var o = mydata[i];

@@ -17,10 +17,10 @@ class _WordCloudBlockState extends State<WordCloudBlock> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
       decoration: BoxDecoration(
         //背景
-        color: Colors.blue,
+        color: Color(0xfffab27b),
         //设置四周圆角 角度
         borderRadius: BorderRadius.all(
           Radius.circular(10.0),

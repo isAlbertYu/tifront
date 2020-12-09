@@ -22,10 +22,10 @@ class CellsDataModel{
     dataCellsList.clear();
     for (var i = 0; i < 5; ++i) {
       dynamic jsondata = await TiHttp.getHttp("/stat_$i");
-      var mydata = json.decode(jsondata) as String;
+      var mydata = jsondata as int;
       dataCellsList.add(CellData(number: mydata));
     }
-    dataCellsList.add(CellData(number: '${random.nextInt(1000000)}'));
+    dataCellsList.add(CellData(number: random.nextInt(1000000)));
   }
 
   /// 从服务器拉取数据
@@ -39,7 +39,7 @@ class CellsDataModel{
 
 class CellData {
   final String title;
-  final String number;
+  final int number;
 
   CellData({this.title, this.number});
 }

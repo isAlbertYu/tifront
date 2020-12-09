@@ -13,8 +13,8 @@ class WordcloudDataModel extends ChangeNotifier {
     print("从服务器拉取数据...");
     weightWordList.clear();
     weightWordClipList.clear();
-    dynamic jsonData = await TiHttp.getHttp("http://localhost:9999/stat_12");
-    var myData_ = json.decode(jsonData) as Map<String, dynamic>;
+    dynamic jsonData = await TiHttp.getHttp("/stat_12");
+    var myData_ = jsonData as Map<String, dynamic>;
     var myData = myData_["data"];
     for (var i = 0; i < myData.length; ++i) {
       var o = myData[i];
@@ -48,7 +48,7 @@ class WordcloudDataModel extends ChangeNotifier {
     Map<String, dynamic> jsonData = Map();
     jsonData["data"] = this.weightWordList;
     print('this.weightWordList=${this.weightWordList.length}');
-    dynamic rtData = await TiHttp.postHttp('http://localhost:9999/stat_13', jsonData);
+    dynamic rtData = await TiHttp.postHttp('/stat_13', jsonData);
     var myData = json.decode(rtData) as Map<String, dynamic>;
     print('rtData=$myData');
   }

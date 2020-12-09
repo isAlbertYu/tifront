@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 /// Chart import
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tifront/util/screen_util.dart';
+import 'package:tifront/widget/common/title_bar_textstyle.dart';
 import 'package:tifront/widget/stat/models/graph_block_rfr_btn_model.dart';
 import 'package:tifront/widget/visual/models/pie_data.dart';
 
@@ -12,10 +13,10 @@ class PieBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+      margin: EdgeInsets.fromLTRB(0, 5, 5, 0),
 //      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Color(0xffd3d7d4),
         borderRadius: BorderRadius.all(
           Radius.circular(10.0),
         ),
@@ -72,6 +73,11 @@ class PieChart extends StatelessWidget {
     return SfCircularChart(
       title: ChartTitle(
         text: '来源网站分布',
+        textStyle: titleBarTextStyle(ScreenUtil.instance..init(context)),
+      ),
+      legend: Legend(
+        isVisible: true,
+        overflowMode: LegendItemOverflowMode.wrap,
         textStyle: TextStyle(
           wordSpacing: 0.0,
           //单词间隙(负值可以让单词更紧凑)
@@ -79,15 +85,13 @@ class PieChart extends StatelessWidget {
           //字母间隙(负值可以让字母更紧凑)
           fontStyle: FontStyle.normal,
           //文字样式，斜体和正常
-          fontSize: scUtil.setSp(12),
+          fontSize: 15.0,
           //字体大小
           fontWeight: FontWeight.w900,
           //字体粗细  粗体和正常
-          color: Colors.white70, //文字颜色
+          color: Colors.black, //文字颜色
         ),
       ),
-      legend:
-          Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
       series: _getPieSeries(pieData: model.pieData),
 
       /// To enabe the tooltip and its behaviour.

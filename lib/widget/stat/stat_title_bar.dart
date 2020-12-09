@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tifront/util/screen_util.dart';
+import 'package:tifront/widget/common/title_bar_textstyle.dart';
 import 'package:tifront/widget/stat/models/cells_block_rfr_btn_model.dart';
 
 class StatTitleBar extends StatelessWidget {
@@ -22,16 +24,7 @@ class StatTitleBar extends StatelessWidget {
             child: Text(
               '实时监控数据',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 22.0,
-                height: 2.0,
-                fontFamily: "serif",
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w900,
-                decoration: TextDecoration.none,
-                decorationStyle: TextDecorationStyle.dashed,
-              ),
+              style: titleBarTextStyle(ScreenUtil.instance..init(context)),
             ),
           ),
         ),

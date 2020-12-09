@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScreenUtil {
-  static ScreenUtil instance = ScreenUtil();
+  static ScreenUtil instance = ScreenUtil._();
 
   //设计稿的设备尺寸修改
   double width;
@@ -18,7 +18,7 @@ class ScreenUtil {
 
   static double _textScaleFactor;
 
-  ScreenUtil({
+  ScreenUtil._({
     this.width = 1080,
     this.height = 1920,
     this.allowFontScaling = false,

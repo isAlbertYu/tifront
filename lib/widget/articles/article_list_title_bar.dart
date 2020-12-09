@@ -2,7 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tifront/util/screen_util.dart';
 import 'package:tifront/widget/articles/models/article_list_block_rfr_btn_model.dart';
+import 'package:tifront/widget/common/title_bar_textstyle.dart';
 
 class ArticleListTitleBar extends StatelessWidget {
   @override
@@ -22,16 +24,17 @@ class ArticleListTitleBar extends StatelessWidget {
             child: Text(
               '近七日文章列表',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 20.0,
-                height: 2.0,
-                fontFamily: "serif",
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w900,
-                decoration: TextDecoration.none,
-                decorationStyle: TextDecorationStyle.dashed,
-              ),
+              style: titleBarTextStyle(ScreenUtil.instance..init(context)),
+//              style: TextStyle(
+//                color: Colors.black87,
+//                fontSize: 20.0,
+//                height: 2.0,
+//                fontFamily: "serif",
+//                fontStyle: FontStyle.normal,
+//                fontWeight: FontWeight.w900,
+//                decoration: TextDecoration.none,
+//                decorationStyle: TextDecorationStyle.dashed,
+//              ),
             ),
           ),
         ),
